@@ -1,0 +1,1 @@
+console.log('fora do src');
