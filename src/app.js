@@ -1,5 +1,6 @@
 import express from 'express';
 import db from './config/dbConnection.js';
+import books from './models/Book.js';
 
 db.on("error", console.log.bind(console,"Connection Error"));
 db.once("open", () => {
@@ -9,23 +10,25 @@ db.once("open", () => {
 const app = express();
 app.use(express.json());
 
-const books = [
-   {
-      id: 1,
-      "title": "Clockwork Orange"
-   },
-   {
-      id: 2,
-      "title": "The Simpsons and Their Mathematical Secrets"
-   }
-]
+// const books = [
+//    {
+//       id: 1,
+//       "title": "Clockwork Orange"
+//    },
+//    {
+//       id: 2,
+//       "title": "The Simpsons and Their Mathematical Secrets"
+//    }
+// ]
 
 app.get('/', (req, res) => {
    res.status(200).send('This is your server :)');
 });
 
 app.get('/books', (req, res) => {
-   res.status(200).json(books);
+   books.find((err, books) => {
+      res.status(200).json(books);
+   })
 });
 
 app.get('/books/:id', (req, res) => {
