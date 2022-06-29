@@ -12,18 +12,6 @@ const app = express();
 app.use(express.json());
 routes(app);
 
-app.get('/books/:id', (req, res) => {
-   const {id} = req.params;
-   books.findById(id, (err, books) => {
-      res.status(302).json(books);
-   });
-});
-
-app.post('/books', (req, res) => {
-   books.push(req.body);
-   res.status(201).send('Values inserted!');
-});
-
 app.put('/books/:id', (req, res) => {
    const {id} = req.params;
    const {title} = req.body;
