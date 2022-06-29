@@ -5,7 +5,7 @@ function routes(app) {
    app.route('/').get((req, res) => {
       res.status(200).send(
          {
-            "title": "This is your server :)"
+            title: "This is your server :)"
          }
       );
    });

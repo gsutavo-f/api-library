@@ -11,8 +11,8 @@ class BookController {
    static getBookById(req, res) {
       const {id} = req.params;
       Book.findById(id, (err, books) => {
-         res.status(302).json(books);
-      })
+         res.status(302).send(books.toJSON());
+      });
    }
 
    static insertBook(req, res) {
