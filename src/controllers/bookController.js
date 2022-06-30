@@ -11,7 +11,15 @@ class BookController {
    static getBookById(req, res) {
       const {id} = req.params;
       Book.findById(id, (err, books) => {
-         res.status(302).send(books.toJSON());
+         if(err) {
+            res.status(400).send(
+               {
+                  message: `${err.message} - id not found!`
+               }
+            );
+         } else {
+            res.status(200).send(books.toJSON());
+         }
       });
    }
 
@@ -26,6 +34,26 @@ class BookController {
             );
          } else {
             res.status(201).send(book.toJSON());
+         }
+      });
+   }
+
+   static updateBook(req, res) {
+      const {id} = req.params;
+
+      Book.findByIdAndUpdate(id, {$set: req.body}, (err) => {
+         if(!err) {
+            res.status(200).send(
+               {
+                  message: 'Value updated!'
+               }
+            );
+         } else {
+            res.status(500).send(
+               {
+                  message: err.message
+               }
+            );
          }
       });
    }
