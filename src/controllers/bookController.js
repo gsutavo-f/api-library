@@ -29,6 +29,21 @@ class BookController {
          });
    }
 
+   static getBooksByTitle(req, res) {
+      const {title} = req.query;
+      Book.find({'title': title}, {}, (err, books) => {
+         if (err) {
+            res.status(400).send(
+               {
+                  message: `${err.message} - title not found!`
+               }
+            );
+         } else {
+            res.status(200).json(books);
+         }
+      })
+   }
+
    static insertBook(req, res) {
       let book = new Book(req.body);
       book.save((err) => {
