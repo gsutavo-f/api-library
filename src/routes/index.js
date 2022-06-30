@@ -1,6 +1,7 @@
 import express from "express";
 import books from "../routes/bookRoutes.js";
 import authors from "../routes/authorRoutes.js";
+import publisher from "../routes/publisherRoutes.js";
 
 function routes(app) {
    app.route('/').get((req, res) => {
@@ -14,7 +15,8 @@ function routes(app) {
    app.use(
       express.json(),
       books,
-      authors
+      authors,
+      publisher
    );
 }
 

@@ -5,6 +5,7 @@ class BookController {
    static getBooks(req, res) {
       Book.find()
          .populate('author')
+         .populate('publisher')
          .exec((err, books) => {
             res.status(200).json(books);
          });
@@ -14,6 +15,7 @@ class BookController {
       const {id} = req.params;
       Book.findById(id)
          .populate('author', 'name')
+         .populate('publisher', 'name')
          .exec((err, book) => {
             if (err) {
                res.status(400).send(
